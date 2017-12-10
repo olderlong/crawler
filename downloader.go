@@ -32,19 +32,19 @@ func httpGet(url string) (content string, statusCode int) {
 	content = string(data)
 	return
 }
-func linkParse(url string) []LinkItem {
+func LinkParse(url string) []LinkItem {
 	doc, err := goquery.NewDocument(url)
 	if err != nil {
 		log.Fatal(err)
 		return nil
 	}
-	var items = make([]LinkItem, 32, 32)
+	var items = make([]LinkItem, 16, 32)
 
-	doc.Find("a").Each(func(i int, s *goquery.Selection) {
+	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
 		var item LinkItem
 		item.URL, _ = s.Attr("href")
 		item.Text = s.Text()
-		items[i] = item
+		items = append(items, item)
 	})
 	return items
 }
