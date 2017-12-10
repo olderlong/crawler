@@ -53,8 +53,10 @@ func LinkParse(base_url string) []LinkItem {
 		if !strings.Contains(item.URL, "http") {
 			item.URL = site + item.URL
 		}
-		item.Text = s.Text()
-		items = append(items, item)
+		if strings.Contains(item.URL, site) {
+			item.Text = s.Text()
+			items = append(items, item)
+		}
 	})
 	return items
 }
