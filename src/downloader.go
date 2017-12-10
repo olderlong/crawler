@@ -18,7 +18,7 @@ type LinkItem struct {
 	Text string
 }
 
-func httpGet(url string) (content string, statusCode int) {
+func GetPageSource(url string) (content string, statusCode int) {
 	resp, err1 := http.Get(url)
 	if err1 != nil {
 		statusCode = -100
@@ -35,18 +35,19 @@ func httpGet(url string) (content string, statusCode int) {
 	return
 }
 
-func LinkParse(base_url string) []LinkItem {
-	doc, err := goquery.NewDocument(base_url)
-	u, _ := url.Parse(base_url)
-	site := u.Scheme + "://" + u.Host
+// LinkParse 根据Url获取网页中当前域名下的URL链接
+func LinkParse(baseURL string) []LinkItem {
 
+	doc, err := goquery.NewDocument(baseURL)
 	if err != nil {
 		log.Fatal(err)
 		return nil
 	}
 
-	var items = make([]LinkItem, 16, 32)
+	u, _ := url.Parse(baseURL)
+	site := u.Scheme + "://" + u.Host
 
+	var items = make([]LinkItem, 16, 32)
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
 		var item LinkItem
 		item.URL, _ = s.Attr("href")
