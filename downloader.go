@@ -4,6 +4,8 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"net/url"
+	"strings"
 
 	"github.com/PuerkitoBio/goquery"
 )
@@ -32,17 +34,25 @@ func httpGet(url string) (content string, statusCode int) {
 	content = string(data)
 	return
 }
-func LinkParse(url string) []LinkItem {
-	doc, err := goquery.NewDocument(url)
+
+func LinkParse(base_url string) []LinkItem {
+	doc, err := goquery.NewDocument(base_url)
+	u, _ := url.Parse(base_url)
+	site := u.Scheme + "://" + u.Host
+
 	if err != nil {
 		log.Fatal(err)
 		return nil
 	}
+
 	var items = make([]LinkItem, 16, 32)
 
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
 		var item LinkItem
 		item.URL, _ = s.Attr("href")
+		if !strings.Contains(item.URL, "http") {
+			item.URL = site + item.URL
+		}
 		item.Text = s.Text()
 		items = append(items, item)
 	})
