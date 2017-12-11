@@ -23,16 +23,41 @@ func PageParse(resp *http.Response) []LinkItem {
 	site := u.Scheme + "://" + u.Host
 
 	var items = make([]LinkItem, 16, 32)
+
 	doc.Find("a").Each(func(_ int, s *goquery.Selection) {
 		var item LinkItem
 		item.URL, _ = s.Attr("href")
 		if !strings.Contains(item.URL, "http") {
 			item.URL = site + item.URL
+			log.Println(item.URL)
 		}
 		if strings.Contains(item.URL, site) {
 			item.Text = s.Text()
 			items = append(items, item)
 		}
 	})
+
 	return items
+}
+
+func GetRespFromQueue() *http.Response {
+	if ResponseQueue.Len() > 0 {
+		item := ResponseQueue.Front()
+		ResponseQueue.Remove(item)
+		return item.Value.(*http.Response)
+	} else {
+		return nil
+	}
+}
+
+func StartParse() {
+	for IsRunning {
+		resp := GetRespFromQueue()
+		if resp != nil {
+			log.Println("Start parsing ...")
+			go PageParse(resp)
+			// IsRunning = false
+
+		}
+	}
 }

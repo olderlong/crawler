@@ -17,3 +17,5 @@ type LinkItem struct {
 var ResponseQueue = list.New()
 
 var URLQueue = list.New()
+
+var IsRunning = false
