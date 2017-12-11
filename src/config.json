@@ -1,0 +1,32 @@
+[
+    {        
+        "URLPattern":"www.cnblogs.com/*",
+        "Rules":[
+            {
+                "ItemName":"Link",
+                "CSSSelector":"a",
+                "AttrName":"href"
+            },
+            {
+                "ItemName":"Title",
+                "CSSSelector":"title",
+                "AttrName":"text"
+            }
+        ]
+    },
+    {        
+        "URLPattern":"www.cnblogs.com/*",
+        "Rules":[
+            {
+                "ItemName":"Link",
+                "CSSSelector":"a",
+                "AttrName":"href"
+            },
+            {
+                "ItemName":"Title",
+                "CSSSelector":"title",
+                "AttrName":"text"
+            }
+        ]
+    }
+]
