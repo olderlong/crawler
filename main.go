@@ -4,12 +4,16 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
-	"time"
+	"runtime"
 
 	"github.com/olderlong/crawler/src"
 )
 
 func main() {
+
+	var MULTICORE int = runtime.NumCPU() //number of core
+	runtime.GOMAXPROCS(MULTICORE)        //running in multicore
+	// println(strconv.Itoa(MULTICORE))
 
 	url := "http://blog.csdn.net/"
 	url1 := "http://www.mamicode.com"
@@ -22,7 +26,6 @@ func main() {
 
 	crawler.IsRunning = true
 	go crawler.StartDownload()
-	time.Sleep(3)
 	go crawler.StartParse()
 
 	s := <-c
