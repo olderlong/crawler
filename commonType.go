@@ -19,3 +19,4 @@ var ResponseQueue = list.New()
 var URLQueue = list.New()
 
 var IsRunning = false
+var ParseConfigs []ParseConfig
