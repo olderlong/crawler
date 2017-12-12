@@ -1,7 +1,7 @@
 [
     {        
         "URLPattern":"www.cnblogs.com/*",
-        "Rules":[
+        "Rules":[   //第一个规则为链接规则，提取的URL作为需要添加到爬去队列中
             {
                 "ItemName":"Link",
                 "CSSSelector":"a",
