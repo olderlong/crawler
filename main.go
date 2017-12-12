@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"runtime"
 
-	"github.com/olderlong/crawler/src"
+	"github.com/olderlong/crawler"
 )
 
 func main() {
