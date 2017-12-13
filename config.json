@@ -1,21 +1,21 @@
 [
     {        
-        "URLPattern":"www.cnblogs.com/*",
-        "Rules":[   //第一个规则为链接规则，提取的URL作为需要添加到爬去队列中
+        "URLPattern":"www.cnblogs.com",
+        "Rules":[   
             {
                 "ItemName":"Link",
-                "CSSSelector":"a",
+                "CSSSelector":".pager > a",                                        
                 "AttrName":"href"
-            },
+            },           
             {
                 "ItemName":"Title",
-                "CSSSelector":"title",
+                "CSSSelector":"h3 > a.titlelnk",
                 "AttrName":"text"
             }
         ]
     },
     {        
-        "URLPattern":"www.cnblogs.com/*",
+        "URLPattern":"www.cnblogs.com",
         "Rules":[
             {
                 "ItemName":"Link",
