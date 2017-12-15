@@ -12,6 +12,12 @@ type LinkItem struct {
 	Text string
 }
 
+//TopicParseResult 主题解析结果
+type TopicParseResult map[string]string
+
+//PageParseResult 页面解析结果
+type PageParseResult map[string]TopicParseResult
+
 // 下面是用到的一些全局队列变量
 
 var ResponseQueue = list.New()

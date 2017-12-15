@@ -1,32 +1,37 @@
-[
-    {        
-        "URLPattern":"www.cnblogs.com",
-        "Rules":[   
-            {
+{    
+    "ConfigureName":"博客园精华帖摘要信息",
+    "BaseURL":"https://www.cnblogs.com/pick",
+    "CrawlerLinkRules":[
+        {
+            "URLPattern":"*/www.cnblogs.com/pick/*",    
+            "LinkRule":{
                 "ItemName":"Link",
-                "CSSSelector":".pager > a",                                        
+                "CSSSelector":".pager > a",
                 "AttrName":"href"
-            },           
-            {
-                "ItemName":"Title",
-                "CSSSelector":"h3 > a.titlelnk",
-                "AttrName":"text"
             }
-        ]
-    },
-    {        
-        "URLPattern":"www.cnblogs.com",
-        "Rules":[
-            {
-                "ItemName":"Link",
-                "CSSSelector":"a",
-                "AttrName":"href"
-            },
-            {
-                "ItemName":"Title",
-                "CSSSelector":"title",
-                "AttrName":"text"
-            }
-        ]
-    }
-]
+        }
+    ],
+    "ParseRules":[
+        {
+            "TopicName":"精华贴摘要",
+            "RootNodeCSSSelector":"div.post_item_body",
+            "ItemRules":[
+                {
+                    "ItemName":"Title",
+                    "CSSSelector":"h3 > a.titlelnk",
+                    "AttrName":"Text"
+                },
+                {
+                    "ItemName":"URL",
+                    "CSSSelector":"h3 > a.titlelnk",
+                    "AttrName":"href"
+                },
+                {
+                    "ItemName":"Summary",
+                    "CSSSelector":"p.post_item_summary",
+                    "AttrName":"Text"
+                }
+            ]  
+        }
+    ]
+}
